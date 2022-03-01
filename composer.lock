@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12524947d8c752f84bc21aaaede06bfa",
+    "content-hash": "7083bc683518dd24296d375faac41ef1",
     "packages": [
         {
             "name": "brick/math",
@@ -2955,6 +2955,77 @@
             "time": "2021-11-01T23:48:49+00:00"
         },
         {
+            "name": "symfony/dotenv",
+            "version": "v5.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "83a2310904a4f5d4f42526227b5a578ac82232a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/83a2310904a4f5d4f42526227b5a578ac82232a9",
+                "reference": "83a2310904a4f5d4f42526227b5a578ac82232a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1|^3"
+            },
+            "require-dev": {
+                "symfony/console": "^4.4|^5.0|^6.0",
+                "symfony/process": "^4.4|^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/dotenv/tree/v5.4.5"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-02-15T17:04:12+00:00"
+        },
+        {
             "name": "symfony/error-handler",
             "version": "v6.0.3",
             "source": {
@@ -4815,6 +4886,73 @@
                 }
             ],
             "time": "2022-02-21T17:15:17+00:00"
+        },
+        {
+            "name": "tapp/laravel-airtable",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TappNetwork/laravel-airtable.git",
+                "reference": "de9d66a926bf270819bff2b0da0200a823214c59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TappNetwork/laravel-airtable/zipball/de9d66a926bf270819bff2b0da0200a823214c59",
+                "reference": "de9d66a926bf270819bff2b0da0200a823214c59",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0 || ~7.0",
+                "illuminate/support": "5.7.* || 5.8.* ||^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "php": "^7.3 || ^8.0",
+                "symfony/dotenv": "^4.2 || ^5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^5.0 || ^6.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^8.4 || ^9.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tapp\\Airtable\\AirtableServiceProvider"
+                    ],
+                    "aliases": {
+                        "Airtable": "Tapp\\Airtable\\Facades\\AirtableFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tapp\\Airtable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steve Williamson",
+                    "email": "steve@tappnetwork.com"
+                }
+            ],
+            "description": "Laravel Airtable SDK",
+            "homepage": "https://github.com/tapp/laravel-airtable",
+            "keywords": [
+                "airtable",
+                "laravel",
+                "tapp"
+            ],
+            "support": {
+                "issues": "https://github.com/TappNetwork/laravel-airtable/issues",
+                "source": "https://github.com/TappNetwork/laravel-airtable/tree/v1.4"
+            },
+            "time": "2022-02-14T15:38:56+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
