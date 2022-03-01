@@ -48,6 +48,10 @@ return [
         'workspaces' => [
             'name' => 'Workspaces',
         ],
+
+        'packages' => [
+            'name' => 'Packages',
+        ],
     ],
 
     /*
