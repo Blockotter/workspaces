@@ -31,7 +31,7 @@
             <div class="absolute bottom-0 p-4 w-full">
                 <div class="float-left">
                     @if ($workspace->getAmenityEmojis())
-                        <span>{{ $workspace->getAmenityEmojis() }}</span>
+                        <span class="absolute bottom-4">{{ $workspace->getAmenityEmojis() }}</span>
                     @endif
                 </div>
                 <div class="float-right">
@@ -44,7 +44,7 @@
                     @endif
 
                     @if ($workspace->getAttribute('website'))
-                        <a href="{{ $workspace->getAttribute('website') }}" class="hover:text-xl">🌎</a>
+                        <a href="{{ $workspace->getAttribute('website') }}" target="_blank" class="hover:text-xl">🌎</a>
                     @endif
                 </div>
             </div>
