@@ -22,7 +22,7 @@
 <div class="flex flex-wrap justify-center">
     @foreach ($workspaces as $workspace)
         <div
-            class="h-64 w-64 m-4 rounded-lg shadow-lg relative bg-cover bg-gray-900/60 bg-blend-darken bg-[url('{{ $workspace->getAttribute('image_url') }}')]">
+            class="h-64 w-64 m-4 rounded-lg shadow-lg relative bg-cover bg-gray-900/60 bg-blend-darken flex justify-center flex-col items-center bg-[url('{{ $workspace->getAttribute('image_url') }}')]">
             <div class="text-center p-16">
                 <h1 class="text-lg font-extrabold mb-2 text-white">{{ $workspace->getName() }}</h1>
                 <p class="text-gray-100 font-bold">{{ $workspace->getAttribute('place') }}</p>
