@@ -10,6 +10,8 @@
             <span class="text-2xl text-white font-extrabold">
                 @if ($workspace->getPrice()->getAttribute('is_recurring'))
                     ${{ number_format($workspace->getPrice()->getAttribute('cost'), 2) }}<sub>/month</sub>
+                @elseif ($workspace->getPrice()->getAttribute('minimum_hours') == 8)
+                    ${{ number_format($workspace->getPrice()->getAttribute('cost') * 8, 2) }}<sub>/day</sub>
                 @else
                     ${{ number_format($workspace->getPrice()->getAttribute('cost'), 2) }}<sub>/hr</sub>
                 @endif
