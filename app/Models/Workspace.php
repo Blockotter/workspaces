@@ -22,6 +22,8 @@ class Workspace extends Model
     public string $phone_number;
     public string $email;
 
+    public string $image_url;
+
     public float $internet_speed;
 
     public DateTime $created_at;
@@ -43,6 +45,7 @@ class Workspace extends Model
         'email',
         'internet_speed',
         'workspace_packages',
+        'image_url',
     ];
 
     public function __construct(array $fields = [])
@@ -57,7 +60,7 @@ class Workspace extends Model
             foreach ($snake_cased_fields['packages'] as $package) {
                 $fields = Airtable::table('packages')->find($package)['fields'];
 
-                if (isset($fields['Workspace']) && ! empty($fields['Workspace'])) {
+                if (isset($fields['Workspace']) && !empty($fields['Workspace'])) {
                     $fields['workspace_id'] = $fields['Workspace'][0];
                 }
 
@@ -66,6 +69,22 @@ class Workspace extends Model
             $this->setAttribute('workspace_packages', $workspace_packages);
         }
 
+        if (isset($snake_cased_fields['image']) && isset($snake_cased_fields['image'][0]['thumbnails'])) {
+            $this->setAttribute('image_url', $snake_cased_fields['image'][0]['thumbnails']['large']['url']);
+        }
+
         parent::__construct($snake_cased_fields);
+    }
+
+    public function getName(): string
+    {
+        $name = $this->getAttribute('name');
+
+        // If the name ends at 'Coworking Space', remove it
+        if (str_ends_with($name, 'Coworking Space')) {
+            $name = substr($name, 0, -15);
+        }
+
+        return $name;
     }
 }

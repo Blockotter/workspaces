@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
-        <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<div class="flex flex-wrap justify-center">
+    @foreach ($workspaces as $workspace)
+        <div
+            class="h-64 w-64 m-4 rounded-lg shadow-lg relative bg-cover bg-gray-900/60 bg-blend-darken bg-[url('{{ $workspace->getAttribute('image_url') }}')]">
+            <div class="text-center p-16">
+                <h1 class="text-lg font-extrabold mb-2 text-white">{{ $workspace->getName() }}</h1>
+                <p class="text-gray-100 font-bold">{{ $workspace->getAttribute('place') }}</p>
+            </div>
+            <!-- Push div to bottom of parent -->
+            <div class="absolute bottom-0 p-4 w-full">
+                <div class="float-right">
+                    @if ($workspace->getAttribute('email'))
+                        <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-xl mr-4">📬</a>
+                    @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        @foreach($workspaces as $workspace)
-                            <div class="p-6">
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        <h1 class="text-xl">
-                                            {{ $workspace->getAttribute('name') }}
-                                        </h1>
-                                        <p class="text-muted text-lg">
-                                            {{ $workspace->getAttribute('place') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    @if ($workspace->getAttribute('phone_number'))
+                        <a href="tel:{{ $workspace->getAttribute('phone_number') }}" class="hover:text-xl mr-4">☎️</a>
+                    @endif
+
+                    @if ($workspace->getAttribute('website'))
+                        <a href="{{ $workspace->getAttribute('website') }}" class="hover:text-xl">🌎</a>
+                    @endif
                 </div>
             </div>
         </div>
-    </body>
+    @endforeach
+</div>
+</body>
 </html>
