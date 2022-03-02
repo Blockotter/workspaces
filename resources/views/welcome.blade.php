@@ -18,7 +18,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-gray-100">
 <div class="flex flex-wrap justify-center">
     @foreach ($workspaces as $workspace)
         <x-workspace-card :workspace="$workspace"/>
