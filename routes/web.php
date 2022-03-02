@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WorkspaceController::class, 'index']);
+Route::get('/addFilter/{key}/{value}', [WorkspaceController::class, 'addFilter'])->name('addFilter');
