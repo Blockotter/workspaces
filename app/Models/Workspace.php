@@ -23,6 +23,7 @@ class Workspace extends Model
     public string $email;
 
     public string $image_url;
+    public string $special_text;
 
     public float $internet_speed;
 
@@ -50,6 +51,7 @@ class Workspace extends Model
         'workspace_packages',
         'workspace_amenities',
         'image_url',
+        'special_text',
         'id',
     ];
 
@@ -160,5 +162,19 @@ class Workspace extends Model
 
         // Return the price with 2 decimals
         return number_format($price, 2);
+    }
+
+    public function getSpecialText(): string|null
+    {
+        // Get the special text
+        $special_text = $this->getAttribute('special_text');
+
+        // If there is no special text, return null
+        if (! $special_text) {
+            return null;
+        }
+
+        // Return the special text
+        return $special_text;
     }
 }

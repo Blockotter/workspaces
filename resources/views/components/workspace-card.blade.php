@@ -1,5 +1,10 @@
 <div
     class="h-64 w-64 m-4 rounded-lg shadow-lg relative bg-cover bg-gray-900/60 bg-blend-darken flex justify-center flex-col items-center bg-[url('{{ $workspace->getAttribute('image_url') }}')]">
+    @if ($workspace->getSpecialText())
+        <div class="bg-white p-2 font-extrabold rounded-lg absolute top-4 left-4">
+            {{ $workspace->getSpecialText() }}
+        </div>
+    @endif
     @if ($workspace->getPrice())
         <div class="absolute top-4 right-4">
             <span class="text-2xl text-white font-extrabold">
