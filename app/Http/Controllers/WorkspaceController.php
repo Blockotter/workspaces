@@ -54,11 +54,24 @@ class WorkspaceController extends Controller
                     return false;
                 });
             }
+
+            // Get the selected amenities and move them to a new collection
+            // Remove the selected amenities from the amenities collection
+            $selected_amenities = collect(request('amenities'))->map(function ($amenityId) use ($amenities) {
+                return $amenities->filter(function ($amenity) use ($amenityId) {
+                    return $amenity->getAttributes()['id'] === $amenityId;
+                })->first();
+            });
+
+            $amenities = $amenities->filter(function ($amenity) use ($selected_amenities) {
+                return !$selected_amenities->contains($amenity);
+            });
         }
 
         return view('welcome', [
             'workspaces' => $workspaces,
             'amenities' => $amenities,
+            'selected_amenities' => $selected_amenities ?? null,
         ]);
     }
 
@@ -86,10 +99,16 @@ class WorkspaceController extends Controller
         // Get the current URL
         $url = request()->headers->get('referer');
 
-        // Remove ['amenities[]' => $value] from the URL
-        if (str_contains($url, '?')) {
-            // If it does, remove the parameter from the end of the URL
-            $url = str_replace('&' . $key . '=' . $value, '', $url);
+        // Replace the parameter with an empty string
+        // It can use both & and ?
+        $url = str_replace('&' . $key . '=' . $value, '', $url);
+        $url = str_replace('?' . $key . '=' . $value, '', $url);
+
+        // Now, the URL could start with & instead of ?
+        // If it does, replace the & with ?
+        // I am terribly sorry for this
+        if (str_contains($url, '/&')) {
+            $url = str_replace('/&', '/?', $url);
         }
 
         // Redirect to the new URL

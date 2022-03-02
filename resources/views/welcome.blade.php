@@ -40,6 +40,16 @@
 </div>
 <div class="mx-4 mt-4">
     <div class="w-full py-8 pl-4 font-bold bg-[#343298] rounded-lg flex overflow-x-scroll flex-nowrap">
+        @if ($selected_amenities)
+            @foreach($selected_amenities as $amenity)
+                <a href="{{ route('removeFilter', ['key' => 'amenities[]', 'value' => $amenity->getAttributes()['id']]) }}"
+                   class="shadow-lg flex-shrink-0 p-3 bg-white rounded-lg border-white border-2 border-solid mx-4">
+                    {{ $amenity->getAttribute('emoji') }}
+                    <span class="ml-2">{{ $amenity->getAttribute('name') }}</span>
+                    <span class="ml-2">✅</span>
+                </a>
+            @endforeach
+        @endif
         @foreach($amenities as $amenity)
             <a href="{{ route('addFilter', ['key' => 'amenities[]', 'value' => $amenity->getAttributes()['id']]) }}"
                class="shadow-lg flex-shrink-0 p-3 bg-white rounded-lg text-[#343298] border-gray-800 border-2 border-dashed grayscale mx-4">
