@@ -13,11 +13,11 @@
         </div>
         <div class="float-right">
             @if ($workspace->getAttribute('email'))
-                <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-xl mr-4">📬</a>
+                <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-xl mr-2">📬</a>
             @endif
 
             @if ($workspace->getAttribute('phone_number'))
-                <a href="tel:{{ $workspace->getAttribute('phone_number') }}" class="hover:text-xl mr-4">☎️</a>
+                <a href="tel:{{ $workspace->getAttribute('phone_number') }}" class="hover:text-xl mr-2">☎️</a>
             @endif
 
             @if ($workspace->getAttribute('website'))
