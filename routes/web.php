@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WorkspaceController::class, 'index']);
-Route::get('/addFilter/{key}/{value}', [WorkspaceController::class, 'addFilter'])->name('addFilter');
-Route::get('/removeFilter/{key}/{value}', [WorkspaceController::class, 'removeFilter'])->name('removeFilter');
+Route::get('addFilter/{key}/{value}', [WorkspaceController::class, 'addFilter'])->name('addFilter');
+Route::get('removeFilter/{key}/{value}', [WorkspaceController::class, 'removeFilter'])->name('removeFilter');
+Route::get('search', [WorkspaceController::class, 'search'])->name('search');

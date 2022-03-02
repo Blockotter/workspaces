@@ -30,9 +30,9 @@
         </h2>
     </div>
 
-    <form action="/" method="GET" class="mt-8 flex">
+    <form action="{{ route('search') }}" method="GET" class="mt-8 flex">
         <input class="w-1/2 p-4 rounded-lg bg-white shadow-lg text-black font-bold" type="text"
-               placeholder="Try Rotterdam, Berlin or Barcelona!" name="place">
+               placeholder="Try Rotterdam, Berlin or Barcelona!" name="place" value="{{ $place }}">
         <button class="p-4 ml-4 rounded-lg bg-white shadow-lg text-black font-bold hover:bg-gray-100">
             Search 🔎
         </button>
@@ -40,6 +40,14 @@
 </div>
 <div class="mx-4 mt-4">
     <div class="w-full py-8 pl-4 font-bold bg-[#343298] rounded-lg flex overflow-x-scroll flex-nowrap">
+        @if ($place)
+            <a href="{{ route('removeFilter', ['key' => 'place', 'value' => $place]) }}"
+               class="shadow-lg flex-shrink-0 p-3 bg-white rounded-lg border-white border-2 border-solid mx-4">
+                📍
+                <span class="ml-2">{{ $place }}</span>
+                <span class="ml-2">✅</span>
+            </a>
+        @endif
         @if ($selected_amenities)
             @foreach($selected_amenities as $amenity)
                 <a href="{{ route('removeFilter', ['key' => 'amenities[]', 'value' => $amenity->getAttributes()['id']]) }}"
