@@ -12,7 +12,7 @@
         <p class="text-gray-100 font-bold">{{ $workspace->getAttribute('place') }}</p>
     </div>
     <!-- Push div to bottom of parent -->
-    <div class="absolute bottom-0 p-4 w-full">
+    <div class="absolute bottom-0 p-4 w-full text-xl">
         <div class="float-left">
             @if ($workspace->getAmenityEmojis())
                 <span class="absolute bottom-4">{{ $workspace->getAmenityEmojis() }}</span>
@@ -20,15 +20,15 @@
         </div>
         <div class="float-right">
             @if ($workspace->getAttribute('email'))
-                <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-xl mr-2">📬</a>
+                <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-2xl mr-2">📬</a>
             @endif
 
             @if ($workspace->getAttribute('phone_number'))
-                <a href="tel:{{ $workspace->getAttribute('phone_number') }}" class="hover:text-xl mr-2">☎️</a>
+                <a href="tel:{{ $workspace->getAttribute('phone_number') }}" class="hover:text-2xl mr-2">☎️</a>
             @endif
 
             @if ($workspace->getAttribute('website'))
-                <a href="{{ $workspace->getAttribute('website') }}" target="_blank" class="hover:text-xl">🌎</a>
+                <a href="{{ $workspace->getAttribute('website') }}" target="_blank" class="hover:text-2xl">🌎</a>
             @endif
         </div>
     </div>
