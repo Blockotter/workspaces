@@ -142,4 +142,23 @@ class Workspace extends Model
         // Return the emojis
         return $emojis;
     }
+
+    public function getPrice()
+    {
+        // If there are no packages, return null
+        if (! $this->getAttribute('workspace_packages')) {
+            return null;
+        }
+
+        // Go over the packages and find the cheapest one
+        $price = 0;
+        foreach ($this->getAttribute('workspace_packages') as $package) {
+            if ($package->getAttribute('cost') < $price || $price == 0) {
+                $price = $package->getAttribute('cost');
+            }
+        }
+
+        // Return the price with 2 decimals
+        return number_format($price, 2);
+    }
 }

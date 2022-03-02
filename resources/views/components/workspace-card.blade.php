@@ -1,5 +1,12 @@
 <div
     class="h-64 w-64 m-4 rounded-lg shadow-lg relative bg-cover bg-gray-900/60 bg-blend-darken flex justify-center flex-col items-center bg-[url('{{ $workspace->getAttribute('image_url') }}')]">
+    @if ($workspace->getPrice())
+        <div class="absolute top-4 right-4">
+            <span class="text-2xl text-white font-extrabold">
+                ${{ $workspace->getPrice() }}<sub>/hr</sub>
+            </span>
+        </div>
+    @endif
     <div class="text-center p-16">
         <h1 class="text-xl font-extrabold mb-2 text-white">{{ $workspace->getName() }}</h1>
         <p class="text-gray-100 font-bold">{{ $workspace->getAttribute('place') }}</p>
