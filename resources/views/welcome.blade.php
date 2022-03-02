@@ -30,9 +30,9 @@
         </h2>
     </div>
 
-    <form action="#" method="GET" class="mt-8 flex">
+    <form action="/" method="GET" class="mt-8 flex">
         <input class="w-1/2 p-4 rounded-lg bg-white shadow-lg text-black font-bold" type="text"
-               placeholder="Try Rotterdam, Berlin or Barcelona!">
+               placeholder="Try Rotterdam, Berlin or Barcelona!" name="place">
         <button class="p-4 ml-4 rounded-lg bg-white shadow-lg text-black font-bold hover:bg-gray-100">
             Search 🔎
         </button>
