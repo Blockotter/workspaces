@@ -8,7 +8,11 @@
     @if ($workspace->getPrice())
         <div class="absolute top-4 right-4">
             <span class="text-2xl text-white font-extrabold">
-                ${{ $workspace->getPrice() }}<sub>/hr</sub>
+                @if ($workspace->getPrice()->getAttribute('is_recurring'))
+                    ${{ number_format($workspace->getPrice()->getAttribute('cost'), 2) }}<sub>/month</sub>
+                @else
+                    ${{ number_format($workspace->getPrice()->getAttribute('cost'), 2) }}<sub>/hr</sub>
+                @endif
             </span>
         </div>
     @endif

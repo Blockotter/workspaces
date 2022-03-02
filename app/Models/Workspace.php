@@ -153,15 +153,15 @@ class Workspace extends Model
         }
 
         // Go over the packages and find the cheapest one
-        $price = 0;
+        $cheapest_package = null;
         foreach ($this->getAttribute('workspace_packages') as $package) {
-            if ($package->getAttribute('cost') < $price || $price == 0) {
-                $price = $package->getAttribute('cost');
+            if ($cheapest_package == null || $package->getAttribute('cost') < $cheapest_package->getAttribute('cost')) {
+                $cheapest_package = $package;
             }
         }
 
-        // Return the price with 2 decimals
-        return number_format($price, 2);
+        // Return the cheapest package
+        return $cheapest_package;
     }
 
     public function getSpecialText(): string|null
