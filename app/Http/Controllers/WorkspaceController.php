@@ -30,6 +30,7 @@ class WorkspaceController extends Controller
 
         return view('welcome', [
             'workspaces' => $workspaces,
+            'amenities' => $amenities,
         ]);
     }
 }
