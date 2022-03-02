@@ -29,6 +29,11 @@
             </div>
             <!-- Push div to bottom of parent -->
             <div class="absolute bottom-0 p-4 w-full">
+                <div class="float-left">
+                    @if ($workspace->getAmenityEmojis())
+                        <span>{{ $workspace->getAmenityEmojis() }}</span>
+                    @endif
+                </div>
                 <div class="float-right">
                     @if ($workspace->getAttribute('email'))
                         <a href="mailto:{{ $workspace->getAttribute('email') }}" class="hover:text-xl mr-4">📬</a>

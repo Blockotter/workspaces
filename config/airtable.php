@@ -52,6 +52,10 @@ return [
         'packages' => [
             'name' => 'Packages',
         ],
+
+        'amenities' => [
+            'name' => 'Amenities',
+        ],
     ],
 
     /*

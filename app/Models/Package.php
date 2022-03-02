@@ -39,7 +39,7 @@ class Package extends Model
     public DateTime $opening_sunday;
     public DateTime $closing_sunday;
 
-    public int $workspace_id;
+    public string $id;
 
     protected $fillable = [
         'name',
@@ -62,20 +62,21 @@ class Package extends Model
         'closing_saturday',
         'opening_sunday',
         'closing_sunday',
-        'workspace_id',
+        'id',
     ];
 
-    public function __construct(array $fields = [], Workspace $workspace = null)
+    public function __construct(string $id, array $fields = [])
     {
+        // Set the id of the workspace
+        $this->setAttribute('id', $id);
+
+        // Change all keys of $fields to snake_case
         $snake_cased_fields = [];
         foreach ($fields as $key => $value) {
             $snake_cased_fields[Str::snake($key)] = $value;
         }
 
-        if ($workspace) {
-            $this->workspace = $workspace;
-        }
-
+        // Set the attributes of the workspace
         parent::__construct($snake_cased_fields);
     }
 }
