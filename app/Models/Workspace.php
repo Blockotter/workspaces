@@ -73,16 +73,18 @@ class Workspace extends Model
             // Create a collection of packages
             $workspace_packages = collect();
 
+            $package_table = Airtable::table('packages')->all();
+
             // Loop through each package
             foreach ($snake_cased_fields['packages'] as $package) {
 
                 // Find the package on Airtable
                 // We can loop over this this way, because we know that a package
                 // will never be used twice. Therefore, we are not doing duplicate checks
-                $package_object = Airtable::table('packages')->find($package);
+                $package_object = $package_table->where('id', $package)->first();
 
                 // Store the fields in a distinct array, so we can add the workspace id to it later
-                $fields = $package_object['fields'];
+                $fields = $package_object['fields'] ?? [];
 
                 // Append the workspace id to the fields
                 if (isset($fields['Workspace']) && !empty($fields['Workspace'])) {
@@ -119,7 +121,7 @@ class Workspace extends Model
         }
 
         // Return the name of the workspace
-        return $name;
+        return $name ? $name : '';
     }
 
     public function getAmenityEmojis(): string|null
