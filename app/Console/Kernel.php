@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule workspaces:cache to run every day at midnight
+        $schedule->command('workspaces:cache')->dailyAt('00:00');
     }
 
     /**
