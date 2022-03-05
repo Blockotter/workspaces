@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Amenity;
+use App\Models\AmenityOld;
 use App\Models\Workspace;
 use Tapp\Airtable\Facades\AirtableFacade as Airtable;
 
@@ -10,67 +11,43 @@ class WorkspaceController extends Controller
 {
     public function index()
     {
-        $amenities = collect(Airtable::table('amenities')->get())->map(function ($item) {
-            return new Amenity($item['id'], $item['fields']);
-        });
-
-        $airtable_query = Airtable::table('workspaces');
+        // Set up Workspace query
+        $workspaces = Workspace::with([
+            'amenities',
+            'packages'
+        ]);
 
         // Check for place GET parameter
         if (request()->has('place')) {
-            $airtable_query->where('Place', request('place'));
+            $workspaces->where('place', request('place'));
         } elseif (request()->headers->get('referer') && str_contains(request()->headers->get('referer'), 'place=')) {
             // Get the place from the previous URL
             // This is to allow filters and search to work together
             $place = substr(request()->headers->get('referer'), strpos(request()->headers->get('referer'), 'place=') + 6);
-            $airtable_query->where('Place', $place);
+            $workspaces->where('place', $place);
         }
-
-        $workspaces = collect($airtable_query->get())->map(function ($record) use ($amenities) {
-            $workspace = new Workspace($record['id'], $record['fields']);
-            if (isset($record['fields']['Amenities'])) {
-                $workspace->setAttribute('workspace_amenities', $record['fields']['Amenities']
-                    ? collect($record['fields']['Amenities'])->map(function ($amenityId) use ($amenities) {
-                        return $amenities->filter(function ($amenity) use ($amenityId) {
-                            return $amenity->getAttributes()['id'] === $amenityId;
-                        })->first();
-                    })
-                    : collect());
-            }
-            return $workspace;
-        });
 
         // Check for amenities GET parameter
         if (request()->has('amenities')) {
             foreach (request('amenities') as $amenityId) {
-                $workspaces = $workspaces->filter(function ($workspace) use ($amenityId) {
-                    if ($workspace->getAttribute('workspace_amenities')) {
-                        foreach ($workspace->getAttribute('workspace_amenities') as $amenity) {
-                            if ($amenity->getAttributes()['id'] === $amenityId) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
+                $workspaces = $workspaces->whereHas('amenities', function ($query) use ($amenityId) {
+                    $query->where('amenity_id', $amenityId);
                 });
             }
 
             // Get the selected amenities and move them to a new collection
-            // Remove the selected amenities from the amenities collection
-            $selected_amenities = collect(request('amenities'))->map(function ($amenityId) use ($amenities) {
-                return $amenities->filter(function ($amenity) use ($amenityId) {
-                    return $amenity->getAttributes()['id'] === $amenityId;
-                })->first();
-            });
+            $selected_amenities = Amenity::whereIn('id', request('amenities'))->get();
 
-            $amenities = $amenities->filter(function ($amenity) use ($selected_amenities) {
-                return !$selected_amenities->contains($amenity);
-            });
+            // Get all amenities that are not selected
+            $amenities = Amenity::whereNotIn('id', request('amenities'))->get();
         }
+
+        // Get the workspaces
+        $workspaces = $workspaces->get();
 
         return view('welcome', [
             'workspaces' => $workspaces,
-            'amenities' => $amenities,
+            'amenities' => $amenities ?? Amenity::all(),
             'selected_amenities' => $selected_amenities ?? null,
             'place' => request('place') ?? null,
         ]);
