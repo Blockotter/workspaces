@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Amenity;
 use App\Models\Package;
 use App\Models\Workspace;
+use DB;
 use Illuminate\Console\Command;
 use Str;
 use Tapp\Airtable\Facades\AirtableFacade as Airtable;
@@ -17,6 +18,15 @@ class CacheWorkspacesCommand extends Command
 
     public function handle()
     {
+        // Clear all databases
+        Workspace::truncate();
+        Amenity::truncate();
+        Package::truncate();
+
+        // Clear the pivot tables
+        DB::table('amenity_workspace')->truncate();
+        DB::table('package_workspace')->truncate();
+
         collect(Airtable::table('amenities')->get())->map(function ($item) {
 
             // Change all keys of $fields to snake_case
